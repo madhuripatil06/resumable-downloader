@@ -2,6 +2,19 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 mainClassName = "DownloaderApp"
+version = '1.0'
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Resumable downloader',
+                'Implementation-Version': version,
+                'Main-Class': 'DownloaderApp'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
 
 repositories {
     jcenter()
