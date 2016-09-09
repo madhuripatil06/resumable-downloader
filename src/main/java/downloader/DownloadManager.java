@@ -22,6 +22,7 @@ public class DownloadManager {
                 try {
                     synchronized (mutex) {
                         outputStream.write();
+                        downloadComplete = true;
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
