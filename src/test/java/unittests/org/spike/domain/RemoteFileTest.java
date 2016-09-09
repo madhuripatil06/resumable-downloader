@@ -1,6 +1,6 @@
-package unittests.domain;
+package unittests.org.spike.domain;
 
-import domain.RemoteFile;
+import org.spike.domain.RemoteFile;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package domain;
+package org.spike.domain;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.io.FilenameUtils;

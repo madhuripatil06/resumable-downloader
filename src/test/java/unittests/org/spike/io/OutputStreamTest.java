@@ -1,6 +1,6 @@
-package unittests;
+package unittests.org.spike.io;
 
-import downloader.OutputStream;
+import org.spike.io.OutputStream;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

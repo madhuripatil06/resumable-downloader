@@ -1,4 +1,6 @@
-package domain;
+package org.spike.io;
+
+import org.spike.domain.RemoteFile;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

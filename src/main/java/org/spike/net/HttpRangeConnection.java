@@ -1,4 +1,4 @@
-package domain;
+package org.spike.net;
 
 import java.io.IOException;
 import java.io.InputStream;

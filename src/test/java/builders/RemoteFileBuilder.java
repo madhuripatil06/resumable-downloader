@@ -1,6 +1,6 @@
 package builders;
 
-import domain.RemoteFile;
+import org.spike.domain.RemoteFile;
 
 import java.net.MalformedURLException;
 

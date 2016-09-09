@@ -1,14 +1,11 @@
-package downloader;
+package org.spike.io;
 
-import domain.FileOutputStreamFactory;
-import domain.HttpRangeConnection;
-import domain.RemoteFile;
+import org.spike.net.HttpRangeConnection;
+import org.spike.domain.RemoteFile;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 /**
  * Created by pankajs on 09/09/16.

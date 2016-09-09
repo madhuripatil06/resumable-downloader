@@ -1,7 +1,7 @@
-import domain.RemoteFile;
-import downloader.DownloadManager;
-import downloader.OutputStream;
-import downloader.ProgressBar;
+import org.spike.domain.RemoteFile;
+import org.spike.downloader.DownloadManager;
+import org.spike.io.OutputStream;
+import org.spike.downloader.ProgressBar;
 
 import java.io.IOException;
 

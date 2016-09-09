@@ -1,4 +1,6 @@
-package downloader;
+package org.spike.downloader;
+
+import org.spike.io.OutputStream;
 
 import java.io.IOException;
 
