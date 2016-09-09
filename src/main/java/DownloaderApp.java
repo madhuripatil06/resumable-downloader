@@ -1,6 +1,7 @@
 import domain.RemoteFile;
 import downloader.DownloadManager;
 import downloader.OutputStream;
+import downloader.ProgressBar;
 
 import java.io.IOException;
 
@@ -17,20 +18,9 @@ public class DownloaderApp {
             OutputStream outputStream = new OutputStream(remoteFile, 1024);
             DownloadManager manager = new DownloadManager(outputStream);
             manager.start();
-            displayProgress(manager);
+            new ProgressBar(manager).display("Downloading..");
         } catch (IOException ex) {
             System.out.println("Download complete.");
-        }
-    }
-
-    private static void displayProgress(DownloadManager manager) throws InterruptedException {
-        while (!manager.isDownloadComplete())
-        {
-            for (String phase : new String[]{"|", "/", "-", "\\"})
-            {
-                System.out.printf("\r\b Downloading... " + phase);
-                Thread.sleep(100);
-            }
         }
     }
 }

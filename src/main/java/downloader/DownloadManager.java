@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Created by pankajs on 09/09/16.
  */
-public class DownloadManager {
+public class DownloadManager implements Trackable {
     private final OutputStream outputStream;
     private Thread thread;
     private Object mutex=new Object();
@@ -36,7 +36,7 @@ public class DownloadManager {
         return true;
     }
 
-    public boolean isDownloadComplete() {
-        return !thread.isAlive() || thread.isInterrupted();
+    public boolean isRunning() {
+        return thread.isAlive() && !thread.isInterrupted();
     }
 }

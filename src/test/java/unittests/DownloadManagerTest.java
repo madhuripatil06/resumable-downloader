@@ -10,6 +10,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -52,7 +53,7 @@ public class DownloadManagerTest {
         DownloadManager downloadManager = new DownloadManager(outputStream);
         downloadManager.start();
         downloadManager.cancel();
-        assertTrue(downloadManager.isDownloadComplete());
+        assertFalse(downloadManager.isRunning());
     }
 
     class TestOutputStream extends OutputStream {
