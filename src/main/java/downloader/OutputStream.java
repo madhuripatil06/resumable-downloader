@@ -1,14 +1,13 @@
 package downloader;
 
+import domain.HttpRangeConnection;
 import domain.RemoteFile;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.net.HttpURLConnection;
 
 /**
  * Created by pankajs on 09/09/16.
@@ -19,13 +18,12 @@ public class OutputStream {
     private final int bufferSize;
 
     public OutputStream(final RemoteFile remoteFile, int bufferSize) throws IOException {
-        this.bufferSize = bufferSize;
-        URLConnection urlConnection = remoteFile.sourceUrl().openConnection();
-        urlConnection.setRequestProperty("Range", "bytes=" + remoteFile.localCopyLength() + "-");
-        this.in = new BufferedInputStream(urlConnection.getInputStream());
+        HttpRangeConnection connection = new HttpRangeConnection(remoteFile.sourceUrl(), remoteFile.localCopyLength());
+        this.in = new BufferedInputStream(connection.getInputStream());
         FileOutputStream fos=(remoteFile.localCopyLength()==0)? new FileOutputStream(remoteFile.targetPath()):
-                new FileOutputStream(remoteFile.targetPath(),true);
+                new FileOutputStream(remoteFile.targetPath(), true);
         this.out = new BufferedOutputStream(fos, bufferSize);
+        this.bufferSize = bufferSize;
     }
 
     public OutputStream(BufferedInputStream in, BufferedOutputStream out, int bufferSize) {
@@ -35,13 +33,9 @@ public class OutputStream {
     }
 
     public void write() throws IOException {
-        try {
             byte[] data = new byte[bufferSize];
             for (int x = 0; x >= 0; x = in.read(data, 0, bufferSize))
                 out.write(data, 0, x);
             out.write(data);
-        } catch (Exception ex) {
-            System.out.print(ex);
-        }
     }
 }
