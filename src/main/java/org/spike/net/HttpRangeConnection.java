@@ -11,7 +11,7 @@ import java.net.URL;
 public class HttpRangeConnection {
     private final HttpURLConnection urlConnection;
 
-    public HttpRangeConnection(final URL url, long downloadedBytes) throws IOException {
+    public HttpRangeConnection(final URL url, final long downloadedBytes) throws IOException {
         urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestProperty("Range", "bytes=" + downloadedBytes + "-");
     }

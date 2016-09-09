@@ -27,7 +27,7 @@ public class RemoteFile {
         this.fullTargetPath = targetPath(localPath);
     }
 
-    private boolean directoryExists(String destinationPath) {
+    private boolean directoryExists(final String destinationPath) {
         String directory = FilenameUtils.getPath(destinationPath);
         return Files.exists(Paths.get(directory));
     }

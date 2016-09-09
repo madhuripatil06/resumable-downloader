@@ -8,11 +8,11 @@ import java.util.Arrays;
 public class ProgressBar {
     private final Trackable trackable;
 
-    public ProgressBar(Trackable trackable) {
+    public ProgressBar(final Trackable trackable) {
         this.trackable = trackable;
     }
 
-    public void display(String message) throws InterruptedException {
+    public void display(final String message) throws InterruptedException {
         while (trackable.isRunning())
         {
             String[] shapes = new String[]{"|", "/", "-", "\\"};
@@ -20,7 +20,7 @@ public class ProgressBar {
         }
     }
 
-    private void draw(String message, String shape) {
+    private void draw(final String message, final String shape) {
         try {
             System.out.printf("\r\b " + message + shape);
             Thread.sleep(50);

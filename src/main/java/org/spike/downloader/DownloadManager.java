@@ -12,7 +12,7 @@ public class DownloadManager implements Trackable {
     private Thread thread;
     private Object mutex=new Object();
 
-    public DownloadManager(OutputStream outputStream) {
+    public DownloadManager(final OutputStream outputStream) {
         this.outputStream = outputStream;
     }
 

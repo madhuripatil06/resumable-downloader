@@ -22,7 +22,7 @@ public class OutputStream {
         this.bufferSize = bufferSize;
     }
 
-    public OutputStream(BufferedInputStream in, BufferedOutputStream out, int bufferSize) {
+    public OutputStream(final BufferedInputStream in, final BufferedOutputStream out, int bufferSize) {
         this.bufferSize = bufferSize;
         this.in = in;
         this.out = out;
