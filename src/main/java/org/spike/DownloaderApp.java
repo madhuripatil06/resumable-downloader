@@ -1,3 +1,5 @@
+package org.spike;
+
 import org.spike.domain.RemoteFile;
 import org.spike.downloader.DownloadManager;
 import org.spike.io.OutputStream;
