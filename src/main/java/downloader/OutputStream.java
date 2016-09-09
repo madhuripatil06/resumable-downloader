@@ -1,5 +1,6 @@
 package downloader;
 
+import domain.FileOutputStreamFactory;
 import domain.HttpRangeConnection;
 import domain.RemoteFile;
 
@@ -20,9 +21,7 @@ public class OutputStream {
     public OutputStream(final RemoteFile remoteFile, int bufferSize) throws IOException {
         HttpRangeConnection connection = new HttpRangeConnection(remoteFile.sourceUrl(), remoteFile.localCopyLength());
         this.in = new BufferedInputStream(connection.getInputStream());
-        FileOutputStream fos=(remoteFile.localCopyLength()==0)? new FileOutputStream(remoteFile.targetPath()):
-                new FileOutputStream(remoteFile.targetPath(), true);
-        this.out = new BufferedOutputStream(fos, bufferSize);
+        this.out = new BufferedOutputStream(FileOutputStreamFactory.make(remoteFile), bufferSize);
         this.bufferSize = bufferSize;
     }
 
