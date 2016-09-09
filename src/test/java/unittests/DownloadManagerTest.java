@@ -46,6 +46,15 @@ public class DownloadManagerTest {
         assertTrue(downloadManager.cancel());
     }
 
+    @Test
+    public void isDownloadCompleteShouldReturnFalseWhenDownloadIsComplete() throws IOException, InterruptedException {
+        TestOutputStream outputStream = new TestOutputStream(in, out, 1024);
+        DownloadManager downloadManager = new DownloadManager(outputStream);
+        downloadManager.start();
+        downloadManager.cancel();
+        assertTrue(downloadManager.isDownloadComplete());
+    }
+
     class TestOutputStream extends OutputStream {
         public TestOutputStream(BufferedInputStream in, BufferedOutputStream out, int bufferSize) {
             super(in, out, bufferSize);
