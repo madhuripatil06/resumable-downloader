@@ -16,7 +16,7 @@ public class DownloadManager implements Trackable {
         this.outputStream = outputStream;
     }
 
-    public void start() throws IOException {
+    public DownloadManager start() throws IOException {
         thread = new Thread(() -> {
             try {
                 synchronized (mutex) {
@@ -27,6 +27,7 @@ public class DownloadManager implements Trackable {
             }
         });
         thread.start();
+        return this;
     }
 
 

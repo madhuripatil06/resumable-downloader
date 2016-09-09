@@ -17,10 +17,11 @@ public class DownloaderApp {
     public static void main(String[] args) throws InterruptedException {
         try {
             Preconditions.checkArgument(args.length == 2, "url & location are mandatory parameters");
-            
-            DownloadManager downloadManager = initialize(args);
-            downloadManager.start();
-            new ProgressBar(downloadManager).display("Downloading...");
+
+            DownloadManager downloadManager = initialize(args).start();
+            ProgressBar progressBar = new ProgressBar(downloadManager);
+            progressBar.display("Downloading...");
+
         } catch (IOException ex) {
             System.out.println("Download complete.");
         }
