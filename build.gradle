@@ -2,6 +2,9 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 mainClassName = "org.spike.DownloaderApp"
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
 version = '1.0'
 
 //create a single Jar with all dependencies
