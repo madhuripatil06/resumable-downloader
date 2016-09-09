@@ -16,17 +16,14 @@ public class DownloadManager {
     }
 
     public void start() throws IOException {
-        thread = new Thread(new Runnable() {
-            public void run()
-            {
-                try {
-                    synchronized (mutex) {
-                        outputStream.write();
-                        downloadComplete = true;
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+        thread = new Thread(() -> {
+            try {
+                synchronized (mutex) {
+                    outputStream.write();
+                    downloadComplete = true;
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
         downloadComplete = false;
