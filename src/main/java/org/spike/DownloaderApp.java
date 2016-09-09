@@ -12,8 +12,6 @@ import java.io.IOException;
  * Created by pankajs on 09/09/16.
  */
 public class DownloaderApp {
-    private static  DownloadManager manager;
-
     public static void main(String[] args) throws InterruptedException {
         try {
             Preconditions.checkArgument(args.length == 2, "url & location are mandatory parameters");
