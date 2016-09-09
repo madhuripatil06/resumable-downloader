@@ -9,7 +9,6 @@ public class DownloadManager {
     private final OutputStream outputStream;
     private Thread thread;
     private Object mutex=new Object();
-    private boolean downloadComplete;
 
     public DownloadManager(OutputStream outputStream) {
         this.outputStream = outputStream;
@@ -20,19 +19,16 @@ public class DownloadManager {
             try {
                 synchronized (mutex) {
                     outputStream.write();
-                    downloadComplete = true;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-        downloadComplete = false;
         thread.start();
     }
 
 
     public Boolean cancel() {
-        downloadComplete = true;
         if (thread.isAlive() && !thread.isInterrupted()) {
             thread.interrupt();
             return thread.isInterrupted();
@@ -41,6 +37,6 @@ public class DownloadManager {
     }
 
     public boolean isDownloadComplete() {
-        return downloadComplete;
+        return !thread.isAlive() || thread.isInterrupted();
     }
 }
