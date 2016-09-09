@@ -22,8 +22,8 @@ public class ProgressBar {
 
     private void draw(String message, String shape) {
         try {
-            System.out.printf("\r\b " + message + " " + shape);
-            Thread.sleep(100);
+            System.out.printf("\r\b " + message + shape);
+            Thread.sleep(50);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
