@@ -15,9 +15,9 @@ public class DownloaderApp {
         try {
             RemoteFile remoteFile = new RemoteFile(args[0], args[1]);
             OutputStream outputStream = new OutputStream(remoteFile, 1024);
-            DownloadManager manager = new DownloadManager(outputStream);
-            manager.start();
-            new ProgressBar(manager).display("Downloading..");
+            DownloadManager downloadManager = new DownloadManager(outputStream);
+            downloadManager.start();
+            new ProgressBar(downloadManager).display("Downloading..");
         } catch (IOException ex) {
             System.out.println("Download complete.");
         }
