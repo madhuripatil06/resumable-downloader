@@ -29,9 +29,14 @@ public class OutputStream {
     }
 
     public void write() throws IOException {
+        try {
             byte[] data = new byte[bufferSize];
             for (int x = 0; x >= 0; x = in.read(data, 0, bufferSize))
                 out.write(data, 0, x);
             out.write(data);
+        } finally {
+            in.close();
+            out.close();
+        }
     }
 }
