@@ -17,15 +17,7 @@ public class DownloadManager implements Trackable {
     }
 
     public DownloadManager start() throws IOException {
-        thread = new Thread(() -> {
-            try {
-                synchronized (mutex) {
-                    outputStream.write();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        thread = new Thread(outputStream);
         thread.start();
         return this;
     }

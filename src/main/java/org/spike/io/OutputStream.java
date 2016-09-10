@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by pankajs on 09/09/16.
  */
-public class OutputStream {
+public class OutputStream implements Runnable{
     private final BufferedOutputStream out;
     private final BufferedInputStream in;
     private final int bufferSize;
@@ -37,6 +37,15 @@ public class OutputStream {
         } finally {
             in.close();
             out.close();
+        }
+    }
+
+    @Override
+    public void run() {
+        try {
+            write();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
