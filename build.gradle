@@ -29,7 +29,7 @@ dependencies {
     compile 'com.google.guava:guava:19.0'
     compile 'org.easymock:easymock:3.4'
     compile 'org.mockito:mockito-all:1.9.5'
-
+    compile 'org.apache.commons:commons-lang3:3.4'
 
     testCompile 'junit:junit:4.12'
 }
