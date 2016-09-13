@@ -8,6 +8,7 @@ import org.spike.downloader.ProgressBar;
 import org.spike.net.HttpRangeConnection;
 
 import java.io.IOException;
+import java.util.Timer;
 
 /**
  * Created by pankajs on 09/09/16.
@@ -17,22 +18,22 @@ public class DownloaderApp {
         try {
             Preconditions.checkArgument(args.length == 2, "url & location are mandatory parameters");
 
-            DownloadManager downloadManager = initialize(args).start();
-            ProgressBar progressBar = new ProgressBar(downloadManager);
+            ProgressBar progressBar = new ProgressBar();
+            Worker worker = new Worker(new RemoteFile(url(args), location(args)), 1024, progressBar);
+            DownloadManager downloadManager = new DownloadManager(worker);
+            downloadManager.start();
             progressBar.display("Downloading...");
 
-        } catch (IOException ex) {
-            System.out.println("Download complete.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
-    private static DownloadManager initialize(String[] args) throws IOException {
-        String url = args[0];
-        String location = args[1];
-        RemoteFile remoteFile = new RemoteFile(url, location);
-        HttpRangeConnection httpRangeConnection = new HttpRangeConnection(remoteFile.sourceUrl(),
-                remoteFile.localCopyLength());
-        Worker worker = new Worker(remoteFile, httpRangeConnection,1024);
-        return new DownloadManager(worker);
+    private static String location(String[] args) {
+        return args[1];
+    }
+
+    private static String url(String[] args) {
+        return args[0];
     }
 }

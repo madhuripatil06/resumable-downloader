@@ -5,15 +5,9 @@ import java.util.Arrays;
 /**
  * Created by pankajs on 09/09/16.
  */
-public class ProgressBar {
-    private final Trackable trackable;
-
-    public ProgressBar(final Trackable trackable) {
-        this.trackable = trackable;
-    }
-
+public class ProgressBar implements Callback {
     public void display(final String message) throws InterruptedException {
-        while (trackable.isRunning())
+        while (true)
         {
             String[] shapes = new String[]{"|", "/", "-", "\\"};
             Arrays.stream(shapes).forEach(shape -> draw(message, shape));
@@ -27,5 +21,11 @@ public class ProgressBar {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void invoke(String status) {
+        System.out.println("Download " + status);
+        System.exit(0);
     }
 }

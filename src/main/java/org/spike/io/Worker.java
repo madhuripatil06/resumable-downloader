@@ -1,5 +1,6 @@
 package org.spike.io;
 
+import org.spike.downloader.Callback;
 import org.spike.net.HttpRangeConnection;
 import org.spike.domain.RemoteFile;
 
@@ -13,12 +14,14 @@ import java.io.IOException;
 public class Worker implements Runnable {
     private final RemoteFile remoteFile;
     private final int bufferSize;
+    private final Callback callback;
     private final HttpRangeConnection connection;
 
-    public Worker(final RemoteFile remoteFile, HttpRangeConnection connection, int bufferSize) throws IOException {
-        this.connection = connection;
+    public Worker(final RemoteFile remoteFile, int bufferSize, Callback callback) throws IOException {
+        this.connection = new HttpRangeConnection(remoteFile.sourceUrl(), remoteFile.localCopyLength());
         this.remoteFile = remoteFile;
         this.bufferSize = bufferSize;
+        this.callback = callback;
     }
 
     public void write() throws IOException {
@@ -36,8 +39,10 @@ public class Worker implements Runnable {
     public void run() {
         try {
             write();
+            callback.invoke("completed");
         } catch (IOException e) {
             e.printStackTrace();
+            callback.invoke("failed");
         }
     }
 }
