@@ -3,14 +3,12 @@ package unittests.org.spike.io;
 import builders.RemoteFileBuilder;
 import org.apache.commons.io.IOUtils;
 import org.spike.domain.RemoteFile;
-import org.spike.io.OutputStream;
+import org.spike.io.Worker;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.spike.net.HttpRangeConnection;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -21,7 +19,7 @@ import static org.mockito.Mockito.verify;
 /**
  * Created by pankajs on 09/09/16.
  */
-public class OutputStreamTest {
+public class WorkerTest {
     private HttpRangeConnection httpRangeConnection;
     private InputStream stubInputStream;
 
@@ -38,8 +36,8 @@ public class OutputStreamTest {
     @Test
     public void shouldReturnAppendOnlyOutPutStream() throws IOException {
         RemoteFile remoteFile = new RemoteFileBuilder().build();
-        OutputStream outputStream = new OutputStream(remoteFile, httpRangeConnection, 1024);
-        outputStream.write();
+        Worker worker = new Worker(remoteFile, httpRangeConnection, 1024);
+        worker.write();
         verify(stubInputStream).read(Mockito.anyObject(), Mockito.anyInt(), Mockito.anyInt());
     }
 }

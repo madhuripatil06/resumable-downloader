@@ -3,7 +3,7 @@ package org.spike;
 import com.google.common.base.Preconditions;
 import org.spike.domain.RemoteFile;
 import org.spike.downloader.DownloadManager;
-import org.spike.io.OutputStream;
+import org.spike.io.Worker;
 import org.spike.downloader.ProgressBar;
 import org.spike.net.HttpRangeConnection;
 
@@ -32,7 +32,7 @@ public class DownloaderApp {
         RemoteFile remoteFile = new RemoteFile(url, location);
         HttpRangeConnection httpRangeConnection = new HttpRangeConnection(remoteFile.sourceUrl(),
                 remoteFile.localCopyLength());
-        OutputStream outputStream = new OutputStream(remoteFile, httpRangeConnection,1024);
-        return new DownloadManager(outputStream);
+        Worker worker = new Worker(remoteFile, httpRangeConnection,1024);
+        return new DownloadManager(worker);
     }
 }

@@ -10,12 +10,12 @@ import java.io.IOException;
 /**
  * Created by pankajs on 09/09/16.
  */
-public class OutputStream implements Runnable {
+public class Worker implements Runnable {
     private final RemoteFile remoteFile;
     private final int bufferSize;
     private final HttpRangeConnection connection;
 
-    public OutputStream(final RemoteFile remoteFile, HttpRangeConnection connection, int bufferSize) throws IOException {
+    public Worker(final RemoteFile remoteFile, HttpRangeConnection connection, int bufferSize) throws IOException {
         this.connection = connection;
         this.remoteFile = remoteFile;
         this.bufferSize = bufferSize;

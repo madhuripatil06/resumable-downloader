@@ -1,6 +1,6 @@
 package org.spike.downloader;
 
-import org.spike.io.OutputStream;
+import org.spike.io.Worker;
 
 import java.io.IOException;
 
@@ -8,16 +8,16 @@ import java.io.IOException;
  * Created by pankajs on 09/09/16.
  */
 public class DownloadManager implements Trackable {
-    private final OutputStream outputStream;
+    private final Worker worker;
     private Thread thread;
     private Object mutex=new Object();
 
-    public DownloadManager(final OutputStream outputStream) {
-        this.outputStream = outputStream;
+    public DownloadManager(final Worker worker) {
+        this.worker = worker;
     }
 
     public DownloadManager start() throws IOException {
-        thread = new Thread(outputStream);
+        thread = new Thread(worker);
         thread.start();
         return this;
     }
