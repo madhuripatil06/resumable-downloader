@@ -1,39 +1,38 @@
 package org.spike.downloader;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by pankajs on 09/09/16.
- */
 public class ProgressBar implements Callback {
-    private  Thread thread;
+    private String progress = "";
 
-    public void display(final String message) throws InterruptedException {
-        thread = new Thread() {
-            public void run() {
-                while (true)
-                {
-                    String[] shapes = new String[]{"|", "/", "-", "\\"};
-                    Arrays.stream(shapes).forEach(shape -> draw(message, shape));
-                }
-            }
-        };
+    private void addInProgress(int percentageCompleted){
+        String places = "";
+        places = addHashes(places, percentageCompleted);
+        places = addSpaces(places, percentageCompleted);
+        progress = places;
 
-        thread.start();
     }
 
-    private void draw(final String message, final String shape) {
-        try {
-            System.out.printf("\r\b " + message + shape);
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    private String addSpaces(String places, int completed) {
+        for(int i = 0; i <= 100 - completed ; i++){
+            places += " ";
         }
+        return places;
+    }
+
+    private String addHashes(String places, int completed) {
+        for(int i = 0 ; i < completed ; i++){
+            places += "#";
+        }
+        return places;
     }
 
     @Override
-    public void invoke(String status) {
-        System.out.println("Download " + status);
-        thread.stop();
+    public void invoke(int status) {
+        addInProgress(status);
+        System.out.print("\r\b "+ progress + status + "%");
+        if(status == 100)
+            System.exit(0);
     }
 }

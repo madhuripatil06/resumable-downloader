@@ -24,7 +24,6 @@ public class DownloaderApp {
             Worker worker = new Worker(remoteFile,httpRangeConnection, progressBar);
             DownloadManager downloadManager = new DownloadManager(worker);
             downloadManager.start();
-            progressBar.display("Downloading...");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

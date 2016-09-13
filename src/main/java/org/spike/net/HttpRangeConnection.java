@@ -16,6 +16,10 @@ public class HttpRangeConnection {
         urlConnection.setRequestProperty("Range", "bytes=" + downloadedBytes + "-");
     }
 
+    public int contentLength(){
+        return urlConnection.getContentLength();
+    }
+
     public InputStream getInputStream() throws IOException {
         return urlConnection.getInputStream();
     }
