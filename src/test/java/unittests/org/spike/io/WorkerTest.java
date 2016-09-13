@@ -40,7 +40,7 @@ public class WorkerTest {
     @Test
     public void shouldReturnAppendOnlyOutPutStream() throws IOException {
         RemoteFile remoteFile = new RemoteFileBuilder().build();
-        Worker worker = new Worker(remoteFile, httpRangeConnection, 1024, callback);
+        Worker worker = new Worker(remoteFile, httpRangeConnection, callback);
         worker.write();
         verify(stubInputStream).read(Mockito.anyObject(), Mockito.anyInt(), Mockito.anyInt());
     }

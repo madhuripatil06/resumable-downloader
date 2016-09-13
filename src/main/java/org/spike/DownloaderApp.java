@@ -19,11 +19,12 @@ public class DownloaderApp {
             Preconditions.checkArgument(args.length == 2, "url & location are mandatory parameters");
 
             ProgressBar progressBar = new ProgressBar();
-            Worker worker = new Worker(new RemoteFile(url(args), location(args)), 1024, progressBar);
+            RemoteFile remoteFile= new RemoteFile(url(args), location(args));
+            HttpRangeConnection httpRangeConnection = new HttpRangeConnection(remoteFile.sourceUrl(), remoteFile.localCopyLength());
+            Worker worker = new Worker(remoteFile,httpRangeConnection, progressBar);
             DownloadManager downloadManager = new DownloadManager(worker);
             downloadManager.start();
             progressBar.display("Downloading...");
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }

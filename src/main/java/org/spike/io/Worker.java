@@ -13,22 +13,21 @@ import java.io.IOException;
  */
 public class Worker implements Runnable {
     private final RemoteFile remoteFile;
-    private final int bufferSize;
     private final Callback callback;
     private final HttpRangeConnection connection;
 
-    public Worker(final RemoteFile remoteFile, int bufferSize, Callback callback) throws IOException {
-        this.connection = new HttpRangeConnection(remoteFile.sourceUrl(), remoteFile.localCopyLength());
+    public Worker(final RemoteFile remoteFile,HttpRangeConnection HttpRangeConnection, Callback callback) throws IOException {
+        this.connection = HttpRangeConnection;
+
         this.remoteFile = remoteFile;
-        this.bufferSize = bufferSize;
         this.callback = callback;
     }
 
     public void write() throws IOException {
             try(BufferedInputStream in = new BufferedInputStream(connection.getInputStream())){
-                try(BufferedOutputStream out = new BufferedOutputStream(FileOutputStreamFactory.make(remoteFile), bufferSize)) {
-                    byte[] data = new byte[bufferSize];
-                    for (int x = 0; x >= 0; x = in.read(data, 0, bufferSize))
+                try(BufferedOutputStream out = new BufferedOutputStream(FileOutputStreamFactory.make(remoteFile))) {
+                    byte[] data = new byte[4096];
+                    for (int x = 0; x >= 0; x = in.read(data))
                         out.write(data, 0, x);
                     out.write(data);
                 }
