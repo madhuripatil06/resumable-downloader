@@ -5,6 +5,7 @@ import org.spike.domain.RemoteFile;
 import org.spike.downloader.DownloadManager;
 import org.spike.io.OutputStream;
 import org.spike.downloader.ProgressBar;
+import org.spike.net.HttpRangeConnection;
 
 import java.io.IOException;
 
@@ -29,7 +30,9 @@ public class DownloaderApp {
         String url = args[0];
         String location = args[1];
         RemoteFile remoteFile = new RemoteFile(url, location);
-        OutputStream outputStream = new OutputStream(remoteFile, 1024);
+        HttpRangeConnection httpRangeConnection = new HttpRangeConnection(remoteFile.sourceUrl(),
+                remoteFile.localCopyLength());
+        OutputStream outputStream = new OutputStream(remoteFile, httpRangeConnection,1024);
         return new DownloadManager(outputStream);
     }
 }
