@@ -12,9 +12,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
-/**
- * Created by pankajs on 09/09/16.
- */
+
 public class DownloadManagerTest {
     private Worker worker;
 

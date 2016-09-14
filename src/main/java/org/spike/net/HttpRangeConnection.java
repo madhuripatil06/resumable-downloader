@@ -5,9 +5,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by pankajs on 09/09/16.
- */
 public class HttpRangeConnection {
     private final HttpURLConnection urlConnection;
 

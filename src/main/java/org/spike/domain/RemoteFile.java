@@ -10,9 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * Created by pankajs on 08/09/16.
- */
+
 public class RemoteFile {
     private final URL originalSourceUrl;
     private final String originalDestinationPath;

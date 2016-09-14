@@ -10,9 +10,7 @@ import org.spike.net.HttpRangeConnection;
 import java.io.IOException;
 import java.util.Timer;
 
-/**
- * Created by pankajs on 09/09/16.
- */
+
 public class DownloaderApp {
     public static void main(String[] args) throws InterruptedException {
         try {
