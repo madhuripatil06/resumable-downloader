@@ -1,8 +1,8 @@
 package unittests.org.spike.domain;
 
-import org.spike.domain.RemoteFile;
 import org.junit.Assert;
 import org.junit.Test;
+import org.spike.domain.RemoteFile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

@@ -2,24 +2,19 @@ package unittests.org.spike.io;
 
 import builders.RemoteFileBuilder;
 import org.apache.commons.io.IOUtils;
-import org.spike.domain.RemoteFile;
-import org.spike.downloader.Callback;
-import org.spike.io.Worker;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.spike.domain.RemoteFile;
+import org.spike.downloader.Callback;
+import org.spike.io.Worker;
 import org.spike.net.HttpRangeConnection;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
-/**
- * Created by pankajs on 09/09/16.
- */
 public class WorkerTest {
     private HttpRangeConnection httpRangeConnection;
     private InputStream stubInputStream;
@@ -33,7 +28,7 @@ public class WorkerTest {
 
         Mockito.doReturn(-1).when(stubInputStream).read(Mockito.anyObject(), Mockito.anyInt(), Mockito.anyInt());
         Mockito.doReturn(stubInputStream).when(httpRangeConnection).getInputStream();
-        Mockito.doNothing().when(callback).invoke(Mockito.anyString());
+        Mockito.doNothing().when(callback).invoke(Mockito.anyInt());
 
     }
 
