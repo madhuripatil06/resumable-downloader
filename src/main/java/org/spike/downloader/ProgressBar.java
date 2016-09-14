@@ -11,6 +11,11 @@ public class ProgressBar implements Callback {
         this.noramlizer = 100 / totalSlots;
     }
 
+
+    public ProgressBar() {
+        this(30);
+    }
+
     public String progress(int percentage){
         int completedSymbols = percentage / noramlizer;
         int spaces = totalSlots - completedSymbols;
