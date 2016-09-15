@@ -15,11 +15,8 @@ public class DownloaderApp {
     public static void main(String[] args) throws InterruptedException {
         try {
             Preconditions.checkArgument(args.length == 2, "url & location are mandatory parameters");
-            ProgressBar progressBar = new ProgressBar(30);
             RemoteFile remoteFile= new RemoteFile(url(args), location(args));
-            HttpRangeConnection httpRangeConnection = new HttpRangeConnection(remoteFile.sourceUrl(), remoteFile.localCopyLength());
-            Worker worker = new Worker(remoteFile,httpRangeConnection, progressBar);
-            DownloadManager downloadManager = new DownloadManager(worker);
+            DownloadManager downloadManager = new DownloadManager(remoteFile);
             downloadManager.start();
         } catch (Exception ex) {
             ex.printStackTrace();

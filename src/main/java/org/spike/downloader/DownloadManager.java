@@ -1,12 +1,12 @@
 package org.spike.downloader;
 
+import org.spike.domain.RemoteFile;
 import org.spike.io.Worker;
+import org.spike.net.HttpRangeConnection;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
-/**
- * Created by pankajs on 09/09/16.
- */
 public class DownloadManager implements Trackable {
     private final Worker worker;
     private Thread thread;
@@ -15,6 +15,13 @@ public class DownloadManager implements Trackable {
     public DownloadManager(final Worker worker) {
         this.worker = worker;
     }
+
+    public DownloadManager(RemoteFile remoteFile) throws IOException {
+        ProgressBar progressBar = new ProgressBar(30);
+        HttpRangeConnection httpRangeConnection = new HttpRangeConnection(remoteFile.sourceUrl(), remoteFile.localCopyLength());
+        this.worker = new Worker(remoteFile,httpRangeConnection, progressBar);
+    }
+
 
     public DownloadManager start() throws IOException {
         thread = new Thread(worker);
