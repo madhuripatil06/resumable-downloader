@@ -19,13 +19,12 @@ public class ProgressBar implements Callback {
     public String progress(int percentage){
         int completedSymbols = percentage / noramlizer;
         int spaces = totalSlots - completedSymbols;
-
         StringBuilder builder = new StringBuilder();
         builder.append("[")
                 .append(StringUtils.repeat("=", completedSymbols))
                 .append(StringUtils.repeat(" ", spaces))
                 .append("]");
-        return "\r\b " + builder.toString() + " " + percentage + "%";
+        return builder.toString() + " " + percentage + "%";
     }
 
     @Override

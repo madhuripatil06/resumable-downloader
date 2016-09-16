@@ -1,7 +1,6 @@
 package org.spike;
 
 import com.google.common.base.Preconditions;
-import org.spike.domain.RemoteFile;
 import org.spike.downloader.DownloadManager;
 
 import java.io.IOException;
@@ -17,18 +16,11 @@ public class DownloaderApp {
         }
     }
 
-    private static void processs(String[] args) throws IOException {
-        for (String url : urls(args)) {
-            downloadFile(url, location(args));
-        }
-    }
+    private static void processs(String[] args) throws IOException, InterruptedException {
+        DownloadManager downloadManager = new DownloadManager(urls(args), location(args));
+        downloadManager.run();
 
-    private static void downloadFile(String url, String location) throws IOException {
-        RemoteFile remoteFile= new RemoteFile(url, location);
-        DownloadManager downloadManager = new DownloadManager(remoteFile);
-        downloadManager.start();
     }
-
 
     private static String location(String[] args) {
         return args[args.length-1];
