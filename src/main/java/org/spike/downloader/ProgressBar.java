@@ -24,7 +24,7 @@ public class ProgressBar implements Callback {
                 .append(StringUtils.repeat("=", completedSymbols))
                 .append(StringUtils.repeat(" ", spaces))
                 .append("]");
-        return builder.toString() + " " + percentage + "%";
+        return builder.toString() + " " + percentage;
     }
 
     @Override

@@ -54,17 +54,21 @@ public class DownloadManager implements Trackable {
 
     public void display() throws IOException, InterruptedException {
         while(true){
-            String result = "\r\b";
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            String result = "";
             for (Worker worker : workers) {
-                result += worker.status() + "  ";
+                result += worker.status() + " \n";
             }
             if(isCompleated(result)) {
                 System.exit(0);
             }
-            System.out.print(result);
+            System.out.printf(result);
+            Thread.sleep(1000);
         }
 
     }
+
 
     private boolean isCompleated(String result) {
         String shouldBe ="";
